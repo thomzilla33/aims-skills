@@ -11,6 +11,7 @@ SKILLS=(
   aims-os-ds-component
   aims-os-prototype-screen
   aims-os-versioning-quality
+  demo-walkme
 )
 
 for skill in "${SKILLS[@]}"; do

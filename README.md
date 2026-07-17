@@ -36,7 +36,7 @@ The skills enforce two things across every output:
 
 ---
 
-## The 6 skills
+## The 7 skills
 
 ### 1. `aims-os-feature-versioning`
 **When Claude uses it:** Any time you need to show engineering what ships in V1 vs. what comes later.
@@ -109,11 +109,26 @@ This skill enforces those rules so every screen is structurally identical to eve
 ---
 
 ### 6. `aims-os-versioning-quality`
-**When Claude uses it:** Automatically, before delivering any output from the other 5 skills.
+**When Claude uses it:** Automatically, before delivering any output from the other skills.
 
 This is the quality gate — you never invoke it directly. Claude runs it internally before sending you anything. It checks terminology (no "MVP" instead of V1, no "Phase 2" instead of V2), verifies every checklist item for the relevant workflow, and ensures acceptance criteria are observable and binary before they land in a handoff doc.
 
 If something fails the gate, Claude fixes it before delivering. You always receive complete, correct output.
+
+---
+
+### 7. `demo-walkme`
+**When Claude uses it:** Any time you need to add, port, or upgrade a guided product tour in an AIMS-OS HTML prototype.
+
+This skill adds a floating **Demo** button that opens a spotlight tour — one element at a time, with a popover that explains it and drives the app (navigating routes, switching modes, opening menus). It ships with 6 required upgrades over the baseline: keyboard navigation + focus trap, deep-link to any step via `?tour=N`, resume progress from `localStorage`, click-through spotlight (the highlighted element stays interactive), full accessibility with ARIA live regions, and a responsive mobile bottom-sheet.
+
+The skill includes a drop-in `tour-engine.html` file with all CSS, markup, and JS pre-built. You copy the three blocks into your prototype, author the steps for that specific surface, and verify against the checklist.
+
+**Example prompts:**
+- *"Apply the demo walkme to governance-studio.html"*
+- *"Add a guided tour to the agentic networks prototype"*
+- *"Port the settings.html tour to data-studio"*
+- *"Upgrade the existing tour to add keyboard navigation and resume"*
 
 ---
 
@@ -134,6 +149,11 @@ Most workflows use multiple skills in sequence:
 1. aims-os-ds-component         → Figma extraction → implementation → DS-GAP if missing
 2. aims-os-prototype-screen     → add a screen that uses the new component
 3. aims-os-versioning-quality   → runs automatically before anything is delivered
+```
+
+**Adding a guided demo tour to a prototype:**
+```
+1. demo-walkme                  → copy engine, author steps, wire hooks, verify checklist
 ```
 
 You don't need to think about the chain — just describe what you want and Claude figures out which skills apply.
