@@ -17,6 +17,62 @@ The versioning system lives *in the prototype itself* — not in a separate doc.
 
 ---
 
+## Step 0 — Interview the user before writing anything
+
+**Never generate a version-map, tag elements, or write a changelog before completing this interview.** The interview is mandatory every time this skill activates, even if the user already described the feature. You need structured answers, not a free-form description.
+
+Ask these questions in one message — don't send them one at a time:
+
+---
+
+**Ask this block first:**
+
+> Before I set up the versioning, I need to understand the feature scope. A few questions:
+>
+> 1. **What is the feature called?** (The name that will appear in Jira and the prototype)
+> 2. **What is the core user action?** What does a user actually do in this feature — one sentence.
+> 3. **Which surfaces or views does this feature touch?** (e.g. a list view, a detail SlideOut, an Overview tab, a settings panel — list them all)
+> 4. **Do you already have a V1 scope in mind?** If yes, describe it. If not, I'll help you define it.
+> 5. **Do you already have a Full Vision in mind?** If yes, describe it. If not, describe the problem it solves and I'll help define the scope.
+> 6. **Is there a release target or sprint for V1?** (approximate is fine — "Q3 sprint 2" works)
+> 7. **Are there any items you know are deferred** — things that won't ship in any version because they depend on another team, a future API, or a design decision that hasn't been made yet?
+
+---
+
+**After the user answers, validate before proceeding.** Apply these checks:
+
+### V1 validation — ask yourself, then flag to the user if any fail
+
+| Check | What to look for | What to say if it fails |
+|---|---|---|
+| **V1 is minimal** | V1 scope should be the smallest thing that delivers real value. If it sounds like a full feature, push back. | "That sounds more like V1.5 or V2. What's the minimum version of this that still solves the core problem?" |
+| **V1 has a clear user journey** | There must be one complete flow from start to end — not just a UI element. | "What does the user actually do from opening the feature to completing their task? Walk me through it step by step." |
+| **V1 covers empty and error states** | These are always in V1. If the user didn't mention them, add them. | "I'll add empty state and basic error state to V1 — these are always required." |
+| **V1 doesn't include power-user features** | Bulk actions, advanced filters, saved sets, export — these are always V1.5 or later. | "Bulk select and advanced filters are typically V1.5. Should I move those?" |
+| **Each view is accounted for** | Every surface the user mentioned must appear in at least one version tier. | "You mentioned [surface] — which version does that land in?" |
+
+### V1.5 validation
+
+| Check | What to look for | What to say if it fails |
+|---|---|---|
+| **V1.5 adds depth, not new surfaces** | V1.5 should expand what V1 does, not introduce a completely new screen. | "That sounds like a new surface — it might be better placed in V2. V1.5 should deepen what's already in V1." |
+| **V1.5 is not a dumping ground** | If everything that didn't fit in V1 landed in V1.5, it's too big. | "V1.5 has a lot in it. Should some of these move to V2?" |
+| **V1.5 gap from V1 makes sense** | The jump from V1 to V1.5 should feel like a natural next step, not a big leap. | "Is there a logical reason for V1.5 to exist between V1 and V2? Or is V1 → V2 a cleaner split?" |
+
+### Full Vision validation
+
+| Check | What to look for | What to say if it fails |
+|---|---|---|
+| **Full Vision is actually complete** | It should cover all states, edge cases, power-user flows, and integrations. If it feels thin, push for more. | "This doesn't feel like a full vision yet. What would a power user want that isn't listed here?" |
+| **Full Vision is coherent** | All the pieces should form a unified product experience, not a random list of features. | "How do these pieces connect? Walk me through a power user's full session." |
+| **Deferred items are truly deferred** | Anything that says "pending" or "depends on X" should be in Deferred, not in V2. | "This depends on [X] — should it be Deferred instead of V2 so engineering doesn't block on it?" |
+
+---
+
+**Only after the interview and validation pass** — generate the `version-map.md`, tag elements, and write the changelog. If any validation check raised a question, wait for the user's answer before proceeding.
+
+---
+
 ## The Scope Ladder
 
 Define tiers before touching any code:
