@@ -19,23 +19,106 @@ The versioning system lives *in the prototype itself* — not in a separate doc.
 
 ## Step 0 — Interview the user before writing anything
 
-**Never generate a version-map, tag elements, or write a changelog before completing this interview.** The interview is mandatory every time this skill activates, even if the user already described the feature. You need structured answers, not a free-form description.
+**Never generate a version-map, tag elements, or write a changelog before completing this interview.** The interview is mandatory every time this skill activates, even if the user already described the feature.
 
-Ask these questions in one message — don't send them one at a time:
+Ask questions **one at a time**. Each question must offer:
+- **Multiple choice options** (2–4 realistic options based on context)
+- A **(Recommended)** label on the option you'd suggest given what you know
+- An explicit **"Write my own answer"** option at the end of every list
+
+Wait for the user's answer before asking the next question. Never batch them.
 
 ---
 
-**Ask this block first:**
+### Question sequence
 
-> Before I set up the versioning, I need to understand the feature scope. A few questions:
->
-> 1. **What is the feature called?** (The name that will appear in Jira and the prototype)
-> 2. **What is the core user action?** What does a user actually do in this feature — one sentence.
-> 3. **Which surfaces or views does this feature touch?** (e.g. a list view, a detail SlideOut, an Overview tab, a settings panel — list them all)
-> 4. **Do you already have a V1 scope in mind?** If yes, describe it. If not, I'll help you define it.
-> 5. **Do you already have a Full Vision in mind?** If yes, describe it. If not, describe the problem it solves and I'll help define the scope.
-> 6. **Is there a release target or sprint for V1?** (approximate is fine — "Q3 sprint 2" works)
-> 7. **Are there any items you know are deferred** — things that won't ship in any version because they depend on another team, a future API, or a design decision that hasn't been made yet?
+**Q1 — Feature name**
+
+> What is this feature called? This is the name that will appear in Jira and the prototype.
+
+*(No options for this one — it's a proper noun. Just ask it and wait.)*
+
+---
+
+**Q2 — Core user action**
+
+> What does a user actually do in this feature? Pick the closest description or write your own.
+
+Options (adapt to context based on the feature name from Q1):
+- "Configure and manage [entities] in a list view" *(Recommended if it's a management surface)*
+- "Monitor and review [activity or status] in real time"
+- "Set up and connect [integrations or workflows]"
+- "Create and publish [content or outputs]"
+- Write my own answer
+
+---
+
+**Q3 — Surfaces and views**
+
+> Which surfaces or views does this feature touch? Select all that apply, or write your own.
+
+Options:
+- List view (filterable entity list)
+- Detail SlideOut (side panel with entity detail)
+- Overview tab (widget canvas with KPIs)
+- Full-page detail view
+- Settings panel or configuration form
+- Modal dialog (confirmation or creation flow)
+- Write my own answer
+
+*(This is multi-select — the user can pick more than one. After they answer, summarize what you heard: "Got it — this feature touches: [list]. Moving on.")*
+
+---
+
+**Q4 — V1 scope**
+
+> What's your V1 scope — the minimum version engineering builds first? Pick the closest or write your own.
+
+Options (adapt based on surfaces from Q3):
+- "Read-only list with basic entity states and an empty state" *(Recommended for first-time surfaces)*
+- "List + detail SlideOut, both read-only"
+- "Full list with create/edit actions but no filters or bulk operations"
+- "I already have a detailed V1 scope — let me describe it"
+- Write my own answer
+
+---
+
+**Q5 — Full Vision**
+
+> What does the complete, fully-shipped version of this feature look like? Pick the closest or describe it.
+
+Options:
+- "Full CRUD, advanced filters, bulk actions, and saved filter sets" *(Recommended for management surfaces)*
+- "Real-time data, drill-down analytics, and cross-surface integrations"
+- "Collaborative workflows with role-based permissions and audit log"
+- "I already have a detailed Full Vision — let me describe it"
+- Write my own answer
+
+---
+
+**Q6 — Release target for V1**
+
+> When is V1 targeting release? Pick the closest or write your own.
+
+Options:
+- "This sprint" *(Recommended if the feature is already being prototyped)*
+- "Next sprint"
+- "Q3 2026"
+- "Q4 2026"
+- Write my own answer
+
+---
+
+**Q7 — Known deferred items**
+
+> Are there any items you already know won't ship in any version — things blocked on another team, a future API, or a design decision not yet made?
+
+Options:
+- "Nothing deferred yet — I'll flag as we go" *(Recommended if early in scoping)*
+- "Yes — real-time sync (depends on WebSocket infra)"
+- "Yes — bulk export (pending data team API)"
+- "Yes — I have specific items, let me list them"
+- Write my own answer
 
 ---
 
