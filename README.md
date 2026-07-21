@@ -41,11 +41,17 @@ The skills enforce two things across every output:
 ### 1. `aims-os-feature-versioning`
 **When Claude uses it:** Any time you need to show engineering what ships in V1 vs. what comes later.
 
-This skill defines the versioning system for our prototypes. It creates a scope ladder (V1 → V1.5 → V2), tags every UI element in the prototype by delivery tier, and generates a `version-map.md` file that documents what's in each version.
+This skill defines the versioning system for our prototypes. Before generating anything, Claude runs a mandatory interview — asking 7 structured questions about the feature name, core user action, surfaces involved, V1 scope, Full Vision, release target, and known deferred items. Once you answer, Claude validates each tier against a set of checks (V1 too big? V1.5 introducing new surfaces? Full Vision incomplete?) and flags issues with specific follow-up questions before proceeding.
+
+After the interview passes, the skill generates:
+- A `version-map.md` with the full scope ladder (V1 / V1.5 / V2) and deferred items
+- A `## Changelog` section inside `version-map.md` — one block per tier documenting what's **New**, **Updated**, and **Removed / not included** per view or surface, with a release target
+- `data-version` tags on every prototype element by tier
+- Callout annotations for deferred elements visible in V1 view
 
 **Example prompts:**
-- *"I want to version the Worker Management feature — V1 is just the list with basic states, V2 is with filters and bulk actions"*
-- *"Set up versioning for the Agentic Networks prototype — V1 is the overview tab only"*
+- *"I want to version the Worker Management feature"*
+- *"Set up versioning for the Agentic Networks prototype"*
 - *"Create the scope ladder for Governance Policies"*
 
 ---
