@@ -227,6 +227,127 @@ const showIfV2 = tiers.indexOf(scope) >= tiers.indexOf('v2')
 
 ---
 
+## Feature Changelog
+
+Every versioned feature needs a changelog so engineering and the rest of the team can see at a glance what changed between versions — what's new, what was removed, what was updated in each view.
+
+The changelog lives at the bottom of `version-map.md`, one block per version tier. It is updated every time a tier is defined or revised.
+
+### Format
+
+```markdown
+---
+
+## Changelog
+
+### V1 — Foundation
+**Release target:** [sprint or date]
+
+**New in this version:**
+- [View or surface name]: [what was added — specific feature, not vague description]
+- [View or surface name]: [what was added]
+
+**Updated in this version:**
+- [View or surface name]: [what changed from the previous state / baseline]
+
+**Removed / not included:**
+- [Feature or element]: [why it was cut — deferred to V1.5, pending API, etc.]
+
+---
+
+### V1.5 — Expansion
+**Release target:** [sprint or date]
+
+**New in this version:**
+- [View or surface name]: [what was added on top of V1]
+
+**Updated in this version:**
+- [View or surface name]: [what changed compared to V1]
+
+**Removed / not included:**
+- [Feature]: [reason]
+
+---
+
+### V2 — Full Vision
+**Release target:** [sprint or date]
+
+**New in this version:**
+- [View or surface name]: [what completes the full experience]
+
+**Updated in this version:**
+- [View or surface name]: [what changed compared to V1.5]
+
+**Removed / not included:**
+- _None — this is the complete version._
+```
+
+### Rules for writing changelog entries
+
+- **One entry per view or surface** — if a version touches the Overview tab, the Workers list, and a SlideOut detail, write a separate bullet for each. Don't bundle them.
+- **New** = something that didn't exist in the previous tier. Be specific: "Workers list: added bulk select with action bar" not "added bulk actions".
+- **Updated** = something that existed but changed. Describe the before and after: "Filter bar: was 2 static filters, now has dynamic dropdowns + search".
+- **Removed / not included** = anything cut from that tier and why. Engineering needs to know what's intentionally missing so they don't build it early.
+- **Release target** = sprint name or approximate date. Approximate is fine — "Q3 sprint 2" works. Never leave it blank.
+
+### Real example
+
+```markdown
+## Changelog
+
+### V1 — Foundation
+**Release target:** Sprint 14 (July 2026)
+
+**New in this version:**
+- Workers list: entity list with name, status badge, last active timestamp, and Eye action
+- Workers list: empty state with "Add your first worker" CTA
+- Worker detail SlideOut: name, status, description, created date — read-only
+
+**Updated in this version:**
+- n/a — this is the first version
+
+**Removed / not included:**
+- Workers list: bulk select — deferred to V1.5, requires backend batch API
+- Workers list: search and filter bar — deferred to V1.5
+- Worker detail: edit mode — deferred to V2, pending UX review
+
+---
+
+### V1.5 — Expansion
+**Release target:** Sprint 16 (August 2026)
+
+**New in this version:**
+- Workers list: search input + 2 filter dropdowns (Status, Type)
+- Workers list: bulk select with "Archive" and "Change status" actions
+- Worker detail SlideOut: activity log tab showing last 10 events
+
+**Updated in this version:**
+- Workers list: Eye action now opens the updated SlideOut with the activity tab
+- Empty state: updated copy to reflect filter context ("No workers match your filters")
+
+**Removed / not included:**
+- Worker detail: edit mode — still deferred to V2
+
+---
+
+### V2 — Full Vision
+**Release target:** Sprint 20 (October 2026)
+
+**New in this version:**
+- Worker detail: inline edit mode for name, description, and status
+- Worker detail: linked runs tab showing the last 25 execution logs with status indicators
+- Workers list: saved filter sets — users can name and save filter combinations
+
+**Updated in this version:**
+- Worker detail SlideOut: promoted to full-page detail view (no longer a SlideOut)
+- Filter bar: expanded to 4 filters + "All filters" slideout
+
+**Removed / not included:**
+- _None — this is the complete version._
+```
+
+---
+
 ## Checklist Before Handoff
 
 - [ ] `version-map.md` exists and defines all tiers
@@ -237,4 +358,5 @@ const showIfV2 = tiers.indexOf(scope) >= tiers.indexOf('v2')
 - [ ] V2 scope tested — everything visible
 - [ ] Callouts appear in V1 for deferred V2 elements
 - [ ] Deferred items listed in `version-map.md`
+- [ ] Changelog written for every tier — one entry per view, release target filled in
 - [ ] `aims-os-eng-handoff-spec` completed for this feature
